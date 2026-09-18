@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body> 
+    <header> 
+        <h1>Its a blog</h1>
+        <p>I may or may not have a blog<p>
+    <header>
+<main>
+
+        <section class="create-post">
+            <h2>New Post Button</h2>
+
+            <form action="/posts" method="POST">
+
+                <label for="author">Jeziah C</label>
+                <input
+                    type="text"
+                    id="author"
+                    name="author"
+                    placeholder="Enter your name"
+                    required
+                >
+
+                <label for="title">Blog Title</label>
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="Enter your blog title"
+                    required
+                >
+
+                <label for="content">Blog Content</label>
+                <textarea
+                    id="content"
+                    name="content"
+                    rows="8"
+                    placeholder="Write your blog post here..."
+                    required
+                ></textarea>
+
+                <button type="submit">Publish Post</button>
+
+            </form>
+        </section>
+
+
+        <section class="posts">
+
+            <h2>Posts</h2>
+
+            <% if (posts.length === 0) { %>
+
+                <p>No post, make post!</p>
+
+            <% } %>
+
+
+            <% posts.forEach(post => { %>
+
+                <article class="post">
+
+                    <h3><%= post.title %></h3>
+
+                    <p class="post-info">
+                        By <%= post.author %> |
+                        <%= post.date %>
+                    </p>
+
+                    <p class="post-content">
+                        <%= post.content %>
+                    </p>
+
+                    <div class="buttons">
+
+                        <a href="/edit/<%= post.id %>">
+                            <button type="button">Edit</button>
+                        </a>
+
+                        <form
+                            action="/delete/<%= post.id %>"
+                            method="POST"
+                        >
+                            <button type="submit">Delete</button>
+                        </form>
+
+                    </div>
+
+                </article>
+
+            <% }) %>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
